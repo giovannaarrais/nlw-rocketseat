@@ -1,0 +1,218 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* indica que o tamanho agora levará em conta até a borda - IMPORTANTE */
+}
+
+html, input, select, button, option {
+    font-family: 'Inter', sans-serif;
+    background-color: #09090B;
+    color: #f4f4f5;
+
+    line-height: 120%;
+    letter-spacing:  0.02em;
+}
+
+/*  app  */
+#app {
+    padding: 40px 20px;
+    max-width: 320px; /*chege na largura maxima de 320*/
+    margin: auto;
+}
+ 
+/*  form  */
+
+#place{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 22px 16px;
+
+    font-size: 14px;
+    margin-bottom: 32px;
+    
+}
+
+input, select{
+    all: unset; /*pega tudo q foi definido e tira*/
+
+}
+
+input,select, button{
+    width: 100%; /*para ocupar todo o espaço disponivel*/
+}
+
+.fields{
+    display: grid; /*vai manter cada elemento embaixo do outro*/
+    gap: 8px;
+}
+
+
+
+.field-wrapper{
+    padding: 18px;
+    background-color: #09090B;
+    border: 1px solid #27272A;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px; /*espaço entre os elementos*/
+}
+
+
+
+.field-wrapper:focus-within{ /*ao clicar no input vai aparecer a cor*/
+    outline: 2px solid yellowgreen;
+
+}
+
+button{
+    margin-top: 12px;
+    border: none;
+    padding: 12px 20px;
+    background-color: #AFF445;
+    border-radius: 8px;
+
+    font-weight: 500;
+    font-size: 16px;
+
+    color: #132F00;
+    cursor: pointer;
+
+    transition: background-color 0.6s ease;
+}
+
+button:hover{
+    background-color: rgba(153, 205, 50, 0.829);
+    
+}
+
+.card-bg{
+    background: #18181B;
+    /* shape */
+    box-shadow: 
+     0px 8px 8px rgba(0, 0, 0, 0.1),
+     0px 4px 4px rgba(0, 0, 0, 0.1),
+     0px 2px 2px rgba(0, 0, 0, 0.1),
+     0px 0px 0px 1px rgba(0, 0, 0, 0.1),
+     /*sombra interna*/
+     inset 0px 0px 0px 1px rgba(255, 255, 255, 0.03),   
+     inset 0px 1px 0px rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+}
+
+
+/* main */
+
+main{
+    margin-top: 32px;
+}
+
+h1{
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+
+    margin-bottom: 24px;
+}
+
+section{
+    display: grid;
+    gap: 10px;
+}
+
+section input[type="checkbox"]{ /*ao clicar na caixa fará tal coisa*/
+    inset: 0; /*preenche a caixa exatamente ao redor dela*/
+    position: absolute; /* vai criar uma camada acima querendo preencher e para que mantenha dentro da camada do card coloca position relativa no >>> card-bg */
+
+}
+
+section .card-bg{
+    position: relative; /*  relativo ao absoluto */
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+/*para o hover voltar lentamente*/
+    transform: scale(1); 
+    transition: transform 0.5s ease;
+}
+
+section .card-bg:hover{
+    transform: scale(1.018);
+}
+
+/*checkbox*/
+
+/*vai olhar se dentro dele a algo seleconado oa clicar fará oq está abaixo gracas ao >> section input[type="checkbox"]*/
+section .card-bg:has(:checked) .active, 
+section .card-bg .inactive{  /*quando estiver clicado vai aparecer e quando nao estiver vai sumir*/
+    display: block;
+}
+
+section .card-bg:has(:checked) .inactive, 
+section .card-bg .active{
+    display: none;
+}
+
+section .card-bg > div{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+time{
+    font-size: 14px;
+    color: #A1A1AB;
+    text-align: right;
+}
+
+time.full{ 
+    display: none;
+}
+
+/*responsividade*/
+
+@media (width > 1024px) {
+    #app{
+        display: flex;
+        max-width: 960px;
+        gap: 32px;
+
+    }
+
+    main{
+        margin-top: 0;
+        flex: 1;/*vai ocupar todo o espaço disponivel >> e so funciona se tiver dentro de uma caixa(#app) display: flex;*/
+    }
+
+    h1{
+        text-align: left;
+    }
+
+    time.full{
+        display: block;
+    }
+
+    time.short{
+        display: none;
+    }
+}
+
+/*  animação  */
+
+section .card-bg{
+    animation:  appear 300ms;
+}
+
+@keyframes appear {
+    from{/*ponto incial*/
+        opacity: 0;
+
+    }
+    
+}
